@@ -37,7 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authRouter = require('./routes/auth');
 const mainRouter = require('./routes/main');
 const mixedContactRouter = require('./routes/mixedContact');
-const { cookie } = require('request');
 
 app.use('/api/auth', authRouter);
 app.use('/api/main', mainRouter);

@@ -1,0 +1,10 @@
+.table-wrapper {
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+}
+
+table {
+  margin-top: 20px;
+  width: 100%;
+}

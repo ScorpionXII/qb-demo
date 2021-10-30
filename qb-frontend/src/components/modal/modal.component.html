@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Provide your data!</h1>
+<div mat-dialog-content>
+  <p>Introduce a valid user to create a Freshdesk Contact</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Github User</mat-label>
+    <input matInput [(ngModel)]="inputData.username">
+  </mat-form-field>
+  <p>* This field have been populated default</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Freshdesk Organization</mat-label>
+    <input matInput [(ngModel)]="inputData.freshdeskOrg">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-raised-button mat-dialog-close (click)="createContact()" class="mat-primary">Create Contact</button>
+  <button mat-button mat-raised-button mat-dialog-close class="mat-warn">Cancel</button>
+</div>

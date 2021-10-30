@@ -1,0 +1,46 @@
+<div class="table-wrapper">
+
+  <button mat-raised-button class="mat-primary" (click)="openDialog()">Create Contact From Github</button>
+
+  <table mat-table [dataSource]="mixedContactList" class="mat-elevation-z5">
+
+    <ng-container matColumnDef="githubId">
+      <th mat-header-cell *matHeaderCellDef> Github ID </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.githubId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.email || "Not Available"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="githubUser">
+      <th mat-header-cell *matHeaderCellDef> Github User </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.githubUser}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="githubLocation">
+      <th mat-header-cell *matHeaderCellDef> Github Location </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.githubLocation || "Not Available"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="freshdeskId">
+      <th mat-header-cell *matHeaderCellDef> Freshdesk ID </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.freshdeskId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="freshdeskTimeZone">
+      <th mat-header-cell *matHeaderCellDef> Freshdesk Time Zone </th>
+      <td mat-cell *matCellDef="let mixedContact"> {{mixedContact.freshdeskTimeZone}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mat-toolbar"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

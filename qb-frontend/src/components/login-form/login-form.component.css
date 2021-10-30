@@ -1,0 +1,16 @@
+.form-wrapper {
+  padding: 100px 20px 20px 20px;
+  width: 90%;
+  margin: auto;
+  vertical-align: center;
+}
+
+mat-card {
+  width: 30%;
+  margin: auto;
+}
+
+mat-form-field {
+  display: block;
+  margin-top: 20px;
+}

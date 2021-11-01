@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ModalComponent } from "../modal/modal.component";
 import { SessionService } from "../../services/session/session.service";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-mixed-user-list',
@@ -19,7 +20,7 @@ export class MixedContactListComponent implements OnInit {
   displayedColumns = ['githubId', 'name', 'email', 'githubUser', 'githubLocation', 'freshdeskId', 'freshdeskTimeZone'];
   mixedContactList: Array<MixedContact> = [];
 
-  constructor(private sessionService: SessionService, private mainService: MainService, private router: Router, public dialog: MatDialog) { }
+  constructor(private sessionService: SessionService, private mainService: MainService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.sessionService.isLoggedIn()
@@ -55,6 +56,9 @@ export class MixedContactListComponent implements OnInit {
         (mixedContact) => {
           this.mixedContactList.push(mixedContact);
           this.table.renderRows();
+        },
+        (error) => {
+          this.snackBar.open(error);
         }
       );
   }

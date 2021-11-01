@@ -11,36 +11,45 @@ module.exports = {
      */
     createContactFromGithub: function(req, res) {
         githubProvider.getUserData(req.body.username).then(userData => {
-            const contact = {
-                unique_external_id: userData.id.toString(),
-                name: userData.name || userData.login,
-                email: userData.email,
-                address: userData.location,
+            
+            let contact;
+
+            if (userData.id) {
+                 contact = {
+                    unique_external_id: userData.id && userData.id.toString(),
+                    name: userData.name || userData.login,
+                    email: userData.email,
+                    address: userData.location,
+                }
+            } else {
+                return res.status(404).send({ message: `Github Error: ${userData.message}` });
             }
 
             freshdeskProvider.createContact(req.body.freshdeskOrg, contact).then(contactData => {
-                console.log(contactData);
+                if (!contactData.errors) {
+                    const mixedContact = new MixedContactModel({
+                        name : userData.name || userData.login,
+                        email : userData.email,
+                        githubUser : userData.login,
+                        githubLocation : userData.location,
+                        githubId : userData.id,
+                        freshdeskTimeZone : contactData.time_zone,
+                        freshdeskId : contactData.id
+                    });
+            
+                    mixedContact.save(function (err, mixedContact) {
+                        if (err) {
+                            return res.status(500).json({
+                                message: 'Error when creating MixedContact',
+                                error: err
+                            });
+                        }
 
-                const mixedContact = new MixedContactModel({
-                    name : userData.name || userData.login,
-                    email : userData.email,
-                    githubUser : userData.login,
-                    githubLocation : userData.location,
-                    githubId : userData.id,
-                    freshdeskTimeZone : contactData.time_zone,
-                    freshdeskId : contactData.id
-                });
-        
-                mixedContact.save(function (err, mixedContact) {
-                    if (err) {
-                        return res.status(500).json({
-                            message: 'Error when creating MixedContact',
-                            error: err
-                        });
-                    }
-        
-                    return res.status(201).json(mixedContact);
-                });
+                        return res.status(201).json(mixedContact);
+                    });
+                } else {
+                    return res.status(400).send({ message: `Freshdesk Error: ${contactData.description}` });
+                }
             });
         })
     }

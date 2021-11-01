@@ -11,6 +11,8 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/d
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +21,6 @@ import { MainService } from "../services/main/main.service";
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { MixedContactListComponent } from '../components/mixed-contact-list/mixed-contact-list.component';
 import { ModalComponent } from '../components/modal/modal.component';
-import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -44,11 +45,13 @@ import {MatIconModule} from "@angular/material/icon";
     MatCardModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatSnackBarModule,
   ],
   providers: [
     SessionService,
     MainService,
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true, disableClose: true }},
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true, disableClose: true } },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },
   ],
   bootstrap: [AppComponent]
 })

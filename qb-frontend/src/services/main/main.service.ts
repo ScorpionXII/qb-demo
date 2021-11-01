@@ -34,7 +34,7 @@ export class MainService {
     } else {
       console.error('Backend side error occurred: ', error.error);
     }
-    return throwError('We are having issues, please try again.');
+    return throwError(`We are having issues, please try again. ${error.error.message}`);
   }
 
 }

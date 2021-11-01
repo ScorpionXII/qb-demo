@@ -16,7 +16,6 @@ module.exports = {
             'Content-Type': 'application/json'
         }
 
-        console.log(freshdeskOrg);
         return restClient.post(`https://${freshdeskOrg}.${FRESHDESK_TRAILING_DOMAIN}${FRESHDESK_CONTACTS_ENDPOINT}`, headers, payload);
     }
 }

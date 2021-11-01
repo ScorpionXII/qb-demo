@@ -24,9 +24,14 @@ export class ModalComponent implements OnInit {
   createContact() {
     console.log(this.inputData);
     this.mainService.createContactFromGithub(this.inputData)
-      .subscribe(result => {
-        this.eventEmitter.emit(<MixedContact>result);
-      });
+      .subscribe(
+        result => {
+          this.eventEmitter.emit(<MixedContact>result);
+        },
+        (error) => {
+          this.eventEmitter.error(error);
+        }
+      );
   }
 
 }
